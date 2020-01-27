@@ -1,19 +1,36 @@
 ---
-title: "Time Series Analysis: Fourier Series Harmonic Analysis"
+title: "Time Series Analysis: Modelling the Periodic Component of Monthly Data using Fourier Series Harmonic Analysis"
 output: html_notebook
 ---
-
 # Time Series Analysis
 
 The analysis of time series has taken many forms. One can do time series analysis in the time domain, or in the frequency domain: ARIMA methods in the time domain or spectral analysis in the frequency domain. Fourier series harmonic analysis is time series analysis in the frequency domain.
 
 # Fourier Series
 
+\begin{equation}
+f(x)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} a_{n} \cos n x+\sum_{n=1}^{\infty} b_{n} \sin n x
+\end{equation}
+
+\begin{equation}
+\begin{aligned}
+&a_{0}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \mathrm{d} x\\
+&a_{n}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos n x \mathrm{d} x \quad n=1,2, \ldots\\
+&b_{n}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x \mathrm{d} x \quad n=1,2, \ldots
+\end{aligned}
+\end{equation}
+
 # Fourier Series Harmonic Analysis
 
-$$
+\begin{equation}
+f(t)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi}{L} t+b_{n} \sin \frac{n \pi}{L} t\right)
+\end{equation}
+
+\begin{equation}
 \begin{aligned}
-b_{n} &=\frac{1}{\pi} \int_{-\pi}^{0}\left(\frac{x}{\pi}+1\right) \sin n x \mathrm{d} x+\frac{1}{\pi} \int_{0}^{\pi}\left(\frac{x}{\pi}-1\right) \sin n x \mathrm{d} x \\
-&=\frac{1}{\pi^{2}} \int_{-\pi}^{\pi} x \sin n x \mathrm{d} x+\frac{1}{\pi} \int_{-\pi}^{0} \sin n x \mathrm{d} x-\frac{1}{\pi} \int_{0}^{\pi} \sin n x \mathrm{d} x
+&a_{0}=\frac{1}{L} \int_{-L}^{L} f(t) \mathrm{d} t\\
+&a_{n}=\frac{1}{L} \int_{-L}^{L} f(t) \cos \frac{n \pi}{L} t \mathrm{d} t \quad n=1,2 \ldots\\
+&b_{n}=\frac{1}{L} \int_{-L}^{L} f(t) \sin \frac{n \pi}{L} t \mathrm{d} t \quad n=1,2 \ldots
 \end{aligned}
-$$
+\end{equation}
+
