@@ -1,0 +1,19 @@
+---
+title: "Time Series Analysis: Fourier Series Harmonic Analysis"
+output: html_notebook
+---
+
+# Time Series Analysis
+
+The analysis of time series has taken many forms. One can do time series analysis in the time domain, or in the frequency domain: ARIMA methods in the time domain or spectral analysis in the frequency domain. Fourier series harmonic analysis is time series analysis in the frequency domain.
+
+# Fourier Series
+
+# Fourier Series Harmonic Analysis
+
+$$
+\begin{aligned}
+b_{n} &=\frac{1}{\pi} \int_{-\pi}^{0}\left(\frac{x}{\pi}+1\right) \sin n x \mathrm{d} x+\frac{1}{\pi} \int_{0}^{\pi}\left(\frac{x}{\pi}-1\right) \sin n x \mathrm{d} x \\
+&=\frac{1}{\pi^{2}} \int_{-\pi}^{\pi} x \sin n x \mathrm{d} x+\frac{1}{\pi} \int_{-\pi}^{0} \sin n x \mathrm{d} x-\frac{1}{\pi} \int_{0}^{\pi} \sin n x \mathrm{d} x
+\end{aligned}
+$$
