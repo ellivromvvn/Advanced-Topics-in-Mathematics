@@ -6,6 +6,10 @@ output: html_notebook
 
 The analysis of time series has taken many forms. One can do time series analysis in the time domain, or in the frequency domain: ARIMA methods in the time domain or spectral analysis in the frequency domain. Fourier series harmonic analysis is time series analysis in the frequency domain.
 
+\begin{equation}
+y(t)=P_{t}+T_{t}+\epsilon_{t}
+\end{equation}
+
 # Fourier Series
 
 \begin{equation}
@@ -21,6 +25,18 @@ f(x)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} a_{n} \cos n x+\sum_{n=1}^{\infty} b_{n
 \end{equation}
 
 # Fourier Series Harmonic Analysis
+
+A function $f(x)$ of period $2L$ is repeated when $x$ increases by $2L$, i.e.
+
+\begin{equation}
+f(x+2L)=f(x)
+\end{equation}
+
+If we put $z=\frac{\pi}{L} x$, then the new function $f(z)$ is a periodic function of period $2\pi$. As $x$ increases from $-L$ to $L$, $z$ increases from $-\pi$ to $\pi$. We have
+
+\begin{equation}
+f(z)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} (a_{n} \cos n z + b_{n} \sin n z)
+\end{equation}
 
 \begin{equation}
 f(t)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi}{L} t+b_{n} \sin \frac{n \pi}{L} t\right)

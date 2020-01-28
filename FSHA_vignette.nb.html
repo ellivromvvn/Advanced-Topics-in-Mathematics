@@ -1752,6 +1752,9 @@ summary {
 <div id="time-series-analysis" class="section level1">
 <h1>Time Series Analysis</h1>
 <p>The analysis of time series has taken many forms. One can do time series analysis in the time domain, or in the frequency domain: ARIMA methods in the time domain or spectral analysis in the frequency domain. Fourier series harmonic analysis is time series analysis in the frequency domain.</p>
+<p><span class="math display">\[\begin{equation}
+y(t)=P_{t}+T_{t}+\epsilon_{t}
+\end{equation}\]</span></p>
 </div>
 <div id="fourier-series" class="section level1">
 <h1>Fourier Series</h1>
@@ -1768,6 +1771,14 @@ f(x)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} a_{n} \cos n x+\sum_{n=1}^{\infty} b_{n
 </div>
 <div id="fourier-series-harmonic-analysis" class="section level1">
 <h1>Fourier Series Harmonic Analysis</h1>
+<p>A function <span class="math inline">\(f(x)\)</span> of period <span class="math inline">\(2L\)</span> is repeated when <span class="math inline">\(x\)</span> increases by <span class="math inline">\(2L\)</span>, i.e.</p>
+<p><span class="math display">\[\begin{equation}
+f(x+2L)=f(x)
+\end{equation}\]</span></p>
+<p>If we put <span class="math inline">\(z=\frac{\pi}{L} x\)</span>, then the new function <span class="math inline">\(f(z)\)</span> is a periodic function of period <span class="math inline">\(2\pi\)</span>. As <span class="math inline">\(x\)</span> increases from <span class="math inline">\(-L\)</span> to <span class="math inline">\(L\)</span>, <span class="math inline">\(z\)</span> increases from <span class="math inline">\(-\pi\)</span> to <span class="math inline">\(\pi\)</span>. We have</p>
+<p><span class="math display">\[\begin{equation}
+f(z)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} (a_{n} \cos n z + b_{n} \sin n z)
+\end{equation}\]</span></p>
 <p><span class="math display">\[\begin{equation}
 f(t)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi}{L} t+b_{n} \sin \frac{n \pi}{L} t\right)
 \end{equation}\]</span></p>
@@ -1781,7 +1792,7 @@ f(t)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi}{L} t+b_{n}
 <!-- rnb-text-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRpbWUgU2VyaWVzIEFuYWx5c2lzOiBNb2RlbGxpbmcgdGhlIFBlcmlvZGljIENvbXBvbmVudCBvZiBNb250aGx5IERhdGEgdXNpbmcgRm91cmllciBTZXJpZXMgSGFybW9uaWMgQW5hbHlzaXMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KIyBUaW1lIFNlcmllcyBBbmFseXNpcw0KDQpUaGUgYW5hbHlzaXMgb2YgdGltZSBzZXJpZXMgaGFzIHRha2VuIG1hbnkgZm9ybXMuIE9uZSBjYW4gZG8gdGltZSBzZXJpZXMgYW5hbHlzaXMgaW4gdGhlIHRpbWUgZG9tYWluLCBvciBpbiB0aGUgZnJlcXVlbmN5IGRvbWFpbjogQVJJTUEgbWV0aG9kcyBpbiB0aGUgdGltZSBkb21haW4gb3Igc3BlY3RyYWwgYW5hbHlzaXMgaW4gdGhlIGZyZXF1ZW5jeSBkb21haW4uIEZvdXJpZXIgc2VyaWVzIGhhcm1vbmljIGFuYWx5c2lzIGlzIHRpbWUgc2VyaWVzIGFuYWx5c2lzIGluIHRoZSBmcmVxdWVuY3kgZG9tYWluLg0KDQojIEZvdXJpZXIgU2VyaWVzDQoNClxiZWdpbntlcXVhdGlvbn0NCmYoeCk9XGZyYWN7YV97MH19ezJ9K1xzdW1fe249MX1ee1xpbmZ0eX0gYV97bn0gXGNvcyBuIHgrXHN1bV97bj0xfV57XGluZnR5fSBiX3tufSBcc2luIG4geA0KXGVuZHtlcXVhdGlvbn0NCg0KXGJlZ2lue2VxdWF0aW9ufQ0KXGJlZ2lue2FsaWduZWR9DQomYV97MH09XGZyYWN7MX17XHBpfSBcaW50X3stXHBpfV57XHBpfSBmKHgpIFxtYXRocm17ZH0geFxcDQomYV97bn09XGZyYWN7MX17XHBpfSBcaW50X3stXHBpfV57XHBpfSBmKHgpIFxjb3MgbiB4IFxtYXRocm17ZH0geCBccXVhZCBuPTEsMiwgXGxkb3RzXFwNCiZiX3tufT1cZnJhY3sxfXtccGl9IFxpbnRfey1ccGl9XntccGl9IGYoeCkgXHNpbiBuIHggXG1hdGhybXtkfSB4IFxxdWFkIG49MSwyLCBcbGRvdHMNClxlbmR7YWxpZ25lZH0NClxlbmR7ZXF1YXRpb259DQoNCiMgRm91cmllciBTZXJpZXMgSGFybW9uaWMgQW5hbHlzaXMNCg0KXGJlZ2lue2VxdWF0aW9ufQ0KZih0KT1cZnJhY3thX3swfX17Mn0rXHN1bV97bj0xfV57XGluZnR5fVxsZWZ0KGFfe259IFxjb3MgXGZyYWN7biBccGl9e0x9IHQrYl97bn0gXHNpbiBcZnJhY3tuIFxwaX17TH0gdFxyaWdodCkNClxlbmR7ZXF1YXRpb259DQoNClxiZWdpbntlcXVhdGlvbn0NClxiZWdpbnthbGlnbmVkfQ0KJmFfezB9PVxmcmFjezF9e0x9IFxpbnRfey1MfV57TH0gZih0KSBcbWF0aHJte2R9IHRcXA0KJmFfe259PVxmcmFjezF9e0x9IFxpbnRfey1MfV57TH0gZih0KSBcY29zIFxmcmFje24gXHBpfXtMfSB0IFxtYXRocm17ZH0gdCBccXVhZCBuPTEsMiBcbGRvdHNcXA0KJmJfe259PVxmcmFjezF9e0x9IFxpbnRfey1MfV57TH0gZih0KSBcc2luIFxmcmFje24gXHBpfXtMfSB0IFxtYXRocm17ZH0gdCBccXVhZCBuPTEsMiBcbGRvdHMNClxlbmR7YWxpZ25lZH0NClxlbmR7ZXF1YXRpb259DQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRpbWUgU2VyaWVzIEFuYWx5c2lzOiBNb2RlbGxpbmcgdGhlIFBlcmlvZGljIENvbXBvbmVudCBvZiBNb250aGx5IERhdGEgdXNpbmcgRm91cmllciBTZXJpZXMgSGFybW9uaWMgQW5hbHlzaXMiDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KIyBUaW1lIFNlcmllcyBBbmFseXNpcw0KDQpUaGUgYW5hbHlzaXMgb2YgdGltZSBzZXJpZXMgaGFzIHRha2VuIG1hbnkgZm9ybXMuIE9uZSBjYW4gZG8gdGltZSBzZXJpZXMgYW5hbHlzaXMgaW4gdGhlIHRpbWUgZG9tYWluLCBvciBpbiB0aGUgZnJlcXVlbmN5IGRvbWFpbjogQVJJTUEgbWV0aG9kcyBpbiB0aGUgdGltZSBkb21haW4gb3Igc3BlY3RyYWwgYW5hbHlzaXMgaW4gdGhlIGZyZXF1ZW5jeSBkb21haW4uIEZvdXJpZXIgc2VyaWVzIGhhcm1vbmljIGFuYWx5c2lzIGlzIHRpbWUgc2VyaWVzIGFuYWx5c2lzIGluIHRoZSBmcmVxdWVuY3kgZG9tYWluLg0KDQpcYmVnaW57ZXF1YXRpb259DQp5KHQpPVBfe3R9K1Rfe3R9K1xlcHNpbG9uX3t0fQ0KXGVuZHtlcXVhdGlvbn0NCg0KIyBGb3VyaWVyIFNlcmllcw0KDQpcYmVnaW57ZXF1YXRpb259DQpmKHgpPVxmcmFje2FfezB9fXsyfStcc3VtX3tuPTF9XntcaW5mdHl9IGFfe259IFxjb3MgbiB4K1xzdW1fe249MX1ee1xpbmZ0eX0gYl97bn0gXHNpbiBuIHgNClxlbmR7ZXF1YXRpb259DQoNClxiZWdpbntlcXVhdGlvbn0NClxiZWdpbnthbGlnbmVkfQ0KJmFfezB9PVxmcmFjezF9e1xwaX0gXGludF97LVxwaX1ee1xwaX0gZih4KSBcbWF0aHJte2R9IHhcXA0KJmFfe259PVxmcmFjezF9e1xwaX0gXGludF97LVxwaX1ee1xwaX0gZih4KSBcY29zIG4geCBcbWF0aHJte2R9IHggXHF1YWQgbj0xLDIsIFxsZG90c1xcDQomYl97bn09XGZyYWN7MX17XHBpfSBcaW50X3stXHBpfV57XHBpfSBmKHgpIFxzaW4gbiB4IFxtYXRocm17ZH0geCBccXVhZCBuPTEsMiwgXGxkb3RzDQpcZW5ke2FsaWduZWR9DQpcZW5ke2VxdWF0aW9ufQ0KDQojIEZvdXJpZXIgU2VyaWVzIEhhcm1vbmljIEFuYWx5c2lzDQoNCkEgZnVuY3Rpb24gJGYoeCkkIG9mIHBlcmlvZCAkMkwkIGlzIHJlcGVhdGVkIHdoZW4gJHgkIGluY3JlYXNlcyBieSAkMkwkLCBpLmUuDQoNClxiZWdpbntlcXVhdGlvbn0NCmYoeCsyTCk9Zih4KQ0KXGVuZHtlcXVhdGlvbn0NCg0KSWYgd2UgcHV0ICR6PVxmcmFje1xwaX17TH0geCQsIHRoZW4gdGhlIG5ldyBmdW5jdGlvbiAkZih6KSQgaXMgYSBwZXJpb2RpYyBmdW5jdGlvbiBvZiBwZXJpb2QgJDJccGkkLiBBcyAkeCQgaW5jcmVhc2VzIGZyb20gJC1MJCB0byAkTCQsICR6JCBpbmNyZWFzZXMgZnJvbSAkLVxwaSQgdG8gJFxwaSQuIFdlIGhhdmUNCg0KXGJlZ2lue2VxdWF0aW9ufQ0KZih6KT1cZnJhY3thX3swfX17Mn0rXHN1bV97bj0xfV57XGluZnR5fSAoYV97bn0gXGNvcyBuIHogKyBiX3tufSBcc2luIG4geikNClxlbmR7ZXF1YXRpb259DQoNClxiZWdpbntlcXVhdGlvbn0NCmYodCk9XGZyYWN7YV97MH19ezJ9K1xzdW1fe249MX1ee1xpbmZ0eX1cbGVmdChhX3tufSBcY29zIFxmcmFje24gXHBpfXtMfSB0K2Jfe259IFxzaW4gXGZyYWN7biBccGl9e0x9IHRccmlnaHQpDQpcZW5ke2VxdWF0aW9ufQ0KDQpcYmVnaW57ZXF1YXRpb259DQpcYmVnaW57YWxpZ25lZH0NCiZhX3swfT1cZnJhY3sxfXtMfSBcaW50X3stTH1ee0x9IGYodCkgXG1hdGhybXtkfSB0XFwNCiZhX3tufT1cZnJhY3sxfXtMfSBcaW50X3stTH1ee0x9IGYodCkgXGNvcyBcZnJhY3tuIFxwaX17TH0gdCBcbWF0aHJte2R9IHQgXHF1YWQgbj0xLDIgXGxkb3RzXFwNCiZiX3tufT1cZnJhY3sxfXtMfSBcaW50X3stTH1ee0x9IGYodCkgXHNpbiBcZnJhY3tuIFxwaX17TH0gdCBcbWF0aHJte2R9IHQgXHF1YWQgbj0xLDIgXGxkb3RzDQpcZW5ke2FsaWduZWR9DQpcZW5ke2VxdWF0aW9ufQ0KDQo=</div>
 
 
 
