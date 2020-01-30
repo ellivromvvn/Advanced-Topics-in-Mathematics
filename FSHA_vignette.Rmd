@@ -8,13 +8,20 @@ csl: apa.csl
 bibliography: FSHA_vignette.bib
 nocite: '@*'
 ---
-In this vignette, I will be discussing time series analysis in the frequency domain. I will focus on the use of Fourier series harmonic analysis to model the periodic component of monthly data. I will first discuss time series analysis and monthly data and then continue discussing Fourier series harmonic analysis and its application to modelling the periodic component of monthly data. There will be an example using RStudio at the end.
+In this vignette, I will be discussing the basics of time series analysis in the frequency domain. I will focus on the use of Fourier series harmonic analysis to model the periodic component of monthly data. I will first discuss some basic concepts in time series analysis and then continue discussing Fourier series harmonic analysis and its application to modelling the periodic component of monthly data. To provide an example, Fourier series harmonic analysis will be applied to monthly rainfall data using RStudio [@RStudio]. This vignette attempts to provide basic concepts of  model fitting that will serve as stepping stones to advanced Fourier analysis of time series data.
 
-# Time Series Analysis and Monthly Data
+# Time Series Analysis
 
-Time series data comes in many forms. It can be yearly, quarterly, monthly, daily and even hourly data. It can be heart rates at a given interval, it can be daily stock closing and opening prices, it can be hourly precipitation and temperature, it can be yearly population, etc. It's not a surprise, in the 4th industrial revolution, time series data is available in almost all fields. Time series analysis is performed to gain insights -- periodic and trend behavior -- that will serve as basis for decision making. Imagine if farmers know the periodic behavior of rainfall. They will know what to plant, and when to plant it. Imagine if rainfall can be predicted, disasters caused by floods can be minimized. Time series analysis can be very powerful and useful and can be done in the time domain or frequency domain.
+Time series data comes in many forms. It can be yearly, quarterly, monthly, daily and even hourly data. It can be heart rates at a given interval, it can be daily stock closing and opening prices, it can be hourly precipitation and temperature, it can be yearly population, etc. It's not a surprise, in the 4th industrial revolution, time series data is available in almost all fields. Time series analysis is performed to gain insights -- periodic and trend behavior -- that will serve as basis for decision making. Imagine if farmers know the periodic behavior of rainfall. They will know what to plant, and when to plant it. Imagine if heavy rainfall can be predicted, disasters caused by floods can be minimized. Time series analysis can be very powerful and useful.
 
-This vignette will serve as introduction to time series analysis in the frequency domain. It will give an introductory approach to the application of Fourier series to time series data: monthly time series data. This will be a very convenient approach if we want to move on to advanced Fourier analysis. [insert examples of monthly data]
+The main features of many time series are trends and seasonal variations
+that can be modelled deterministically with mathematical functions of
+time.
+
+Time series analysis is usuallycan be done in the time domain or frequency domain.
+
+
+
 
 A given time series with respect to time $y(t)$ can be decomposed into the sum of its periodic component $P_{t}$, its trend component $T_{t}$, and random component $\epsilon_{t}$:
 
