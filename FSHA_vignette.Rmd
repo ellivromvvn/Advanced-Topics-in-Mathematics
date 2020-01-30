@@ -1,6 +1,9 @@
 ---
-title: "Time Series Analysis: Modelling the Periodic Component of Monthly Data using Fourier Series Harmonic Analysis"
-output: html_notebook
+title: "Time Series Analysis: Modelling the Periodic Component of Monthly Data using Fourier Series Harmonic Analysis in RStudio"
+author: ORVILLE D. HOMBREBUENO
+output: 
+    html_notebook
+documentclass: article
 ---
 In this vignette, I will be discussing time series analysis in the frequency domain. I will focus on the use of Fourier series harmonic analysis to model the periodic component of monthly data. I will first discuss time series analysis and monthly data and then continue discussing Fourier series harmonic analysis and its application to modelling the periodic component of monthly data. There will be an example using RStudio at the end.
 
