@@ -4,6 +4,9 @@ author: ORVILLE D. HOMBREBUENO
 output: 
     html_notebook
 documentclass: article
+csl: apa.csl
+bibliography: FSHA_vignette.bib
+nocite: '@*'
 ---
 In this vignette, I will be discussing time series analysis in the frequency domain. I will focus on the use of Fourier series harmonic analysis to model the periodic component of monthly data. I will first discuss time series analysis and monthly data and then continue discussing Fourier series harmonic analysis and its application to modelling the periodic component of monthly data. There will be an example using RStudio at the end.
 
@@ -67,3 +70,4 @@ f(t)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi}{L} t+b_{n}
 \end{aligned}
 \end{equation}
 
+# Bibliography
