@@ -8,6 +8,9 @@ csl: apa.csl
 bibliography: FSHA_vignette.bib
 nocite: '@*'
 ---
+
+In this vignette, I will be showing basic Fourier series harmonic analysis [@weltner14]. I will show how to fit a Fourier series model to the periodic component of monthly rainfall data using R [@R] in RStudio[@RStudio]. Doing this, I will be following the model-building steps spoused by @box16: 1. model specification, 2. model fitting, 3. model diagnostics.
+
 In this vignette, I will be discussing the basics of time series analysis in the frequency domain. I will focus on the use of Fourier series harmonic analysis to model the periodic component of monthly data. I will first discuss some basic concepts in time series analysis and then continue discussing Fourier series harmonic analysis and its application to modelling the periodic component of monthly data. To provide an example, Fourier series harmonic analysis will be applied to monthly rainfall data using RStudio [@RStudio]. This vignette attempts to provide basic concepts of  model fitting that will serve as stepping stones to advanced Fourier analysis of time series data.
 
 # Time Series Analysis
