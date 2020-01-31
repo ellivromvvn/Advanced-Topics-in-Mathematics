@@ -8,23 +8,20 @@ csl: apa.csl
 bibliography: FSHA_vignette.bib
 nocite: '@*'
 ---
+A time series is a sequence of observations taken sequentially in time. Many sets of data appear as time series: a monthly sequence of the quantity of goods shipped from a factory, a weekly series of the number of road accidents, daily rainfall amounts, hourly observations made on the yield of a chemical process, and so on. Examples of time series abound in such fields as economics, business, engineering, the natural sciences (especially geophysics and meteorology), and the social sciences. The main features of many time series are trends and seasonal variations that can be modelled deterministically with mathematical functions of time. Time series analysis is aimed at explaining the main features in the data using appropriate statistical models and descriptive methods.
 
-In this vignette, I will be showing basic Fourier series harmonic analysis [@weltner14]. I will show how to fit a Fourier series model to the periodic component of monthly rainfall data using R [@R] in RStudio[@RStudio]. Doing this, I will be following the model-building steps spoused by @box16: 1. model specification, 2. model fitting, 3. model diagnostics.
+In this vignette, I will be discussing time series analysis using basic Fourier series harmonic analysis [@weltner14]. I will show how to fit a Fourier series model to the periodic component of monthly rainfall data using R [@R]. In doing this, I will be following the model-building steps espoused by @box16: 1. model specification, 2. model fitting, 3. model diagnostics. I will not discuss theories behind Fourier series harmonic analysis nor will I discuss the importance of fitting a Fourier series model to monthly rainfall data. I will focus on the model fitting process and data analysis, for which I will be using R. 
 
-In this vignette, I will be discussing the basics of time series analysis in the frequency domain. I will focus on the use of Fourier series harmonic analysis to model the periodic component of monthly data. I will first discuss some basic concepts in time series analysis and then continue discussing Fourier series harmonic analysis and its application to modelling the periodic component of monthly data. To provide an example, Fourier series harmonic analysis will be applied to monthly rainfall data using RStudio [@RStudio]. This vignette attempts to provide basic concepts of  model fitting that will serve as stepping stones to advanced Fourier analysis of time series data.
+# Model Specification
 
-# Time Series Analysis
+Our data is the monthly rainfall of Bayombong, Nueva Vizcaya from 2012 to 2015 in millimeters. Let us see the data.
 
-Time series data comes in many forms. It can be yearly, quarterly, monthly, daily and even hourly data. It can be heart rates at a given interval, it can be daily stock closing and opening prices, it can be hourly precipitation and temperature, it can be yearly population, etc. It's not a surprise, in the 4th industrial revolution, time series data is available in almost all fields. Time series analysis is performed to gain insights -- periodic and trend behavior -- that will serve as basis for decision making. Imagine if farmers know the periodic behavior of rainfall. They will know what to plant, and when to plant it. Imagine if heavy rainfall can be predicted, disasters caused by floods can be minimized. Time series analysis can be very powerful and useful.
+```{r}
+load("~/R/PhD/Advanced-Topics-in-Mathematics/Rainfall.RData")
+plot(Rainfall)
+```
 
-The main features of many time series are trends and seasonal variations
-that can be modelled deterministically with mathematical functions of
-time.
-
-Time series analysis is usuallycan be done in the time domain or frequency domain.
-
-
-
+In model specification (or identification), an appropriate model for a given observed series is selected. To choose which model to use is not trivial. However, since my topic is Fourier series harmonic analysis, I will use Fourier series. Moreover, the data show periodic behaviour. I have chosen this kind of data to make the use of Fourier series appropriate.
 
 A given time series with respect to time $y(t)$ can be decomposed into the sum of its periodic component $P_{t}$, its trend component $T_{t}$, and random component $\epsilon_{t}$:
 
@@ -33,28 +30,10 @@ y(t)=P_{t}+T_{t}+\epsilon_{t}.
 \end{equation}
 
 ```{r}
-load("~/R/R Projects/Rain Project/fmsmTS/Data/fmsmrdata1215.RData")
-plot(decompose(fmsmrdata1215))
+plot(decompose(Rainfall))
 ```
 
-
-Fourier series is very appropriate to model 
-
-# Fourier Series
-
-\begin{equation}
-f(x)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} a_{n} \cos n x+\sum_{n=1}^{\infty} b_{n} \sin n x
-\end{equation}
-
-\begin{equation}
-\begin{aligned}
-&a_{0}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \mathrm{d} x\\
-&a_{n}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \cos n x \mathrm{d} x \quad n=1,2, \ldots\\
-&b_{n}=\frac{1}{\pi} \int_{-\pi}^{\pi} f(x) \sin n x \mathrm{d} x \quad n=1,2, \ldots
-\end{aligned}
-\end{equation}
-
-# Fourier Series Harmonic Analysis
+We will be modeling the seasonal or periodic component with Fourier series.
 
 A function $f(x)$ of period $2L$ is repeated when $x$ increases by $2L$, i.e.
 
@@ -62,22 +41,97 @@ A function $f(x)$ of period $2L$ is repeated when $x$ increases by $2L$, i.e.
 f(x+2L)=f(x)
 \end{equation}
 
-If we put $z=\frac{\pi}{L} x$, then the new function $f(z)$ is a periodic function of period $2\pi$. As $x$ increases from $-L$ to $L$, $z$ increases from $-\pi$ to $\pi$. We have
+If we put $z=\frac{\pi x}{L}$, then the function $f(z)$ is a periodic function of period $2\pi$. As $x$ increases from $-L$ to $L$, $z$ increases from $-\pi$ to $\pi$. We have
 
 \begin{equation}
-f(z)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} (a_{n} \cos n z + b_{n} \sin n z)
+f(z)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty} (a_{n} \cos n z + b_{n} \sin n z).
 \end{equation}
 
+Substituting $z$ by $\frac{\pi x}{L}$,
+
 \begin{equation}
-f(t)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi}{L} t+b_{n} \sin \frac{n \pi}{L} t\right)
+f(x)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi x}{L} +b_{n} \sin \frac{n \pi x}{L} \right).
 \end{equation}
+
+To solve for the coefficients we have the following equations:
 
 \begin{equation}
 \begin{aligned}
-&a_{0}=\frac{1}{L} \int_{-L}^{L} f(t) \mathrm{d} t\\
-&a_{n}=\frac{1}{L} \int_{-L}^{L} f(t) \cos \frac{n \pi}{L} t \mathrm{d} t \quad n=1,2 \ldots\\
-&b_{n}=\frac{1}{L} \int_{-L}^{L} f(t) \sin \frac{n \pi}{L} t \mathrm{d} t \quad n=1,2 \ldots
+&a_{0}=\frac{1}{L} \int_{-L}^{L} f(x) \mathrm{d} x\\
+&a_{n}=\frac{1}{L} \int_{-L}^{L} f(x) \cos \frac{n \pi}{L} x \mathrm{d} x \quad n=1,2 \ldots\\
+&b_{n}=\frac{1}{L} \int_{-L}^{L} f(x) \sin \frac{n \pi}{L} x \mathrm{d} x \quad n=1,2 \ldots
 \end{aligned}
 \end{equation}
+
+Defining our Fourier series for $P_{t}$ we have
+
+\begin{equation}
+P_{t}=a_{0}+\sum_{n=1}^{\frac{P}{2}} (a_{n} \cos \frac{2 \pi n t}{P} + b_{n} \sin \frac{2 \pi n t}{P})
+\end{equation}
+
+where $a_{0}$ is the mean monthly rainfall for the model, $a_{n}$ and $b_{n}$ are the Fourier coefficients, $n$ is the number of harmonic, and $P$ is the base period which is 12 months for 1 year. To make the equation more specific, we have
+
+\begin{equation}
+P_t =  a_0 + a_1 \cos \frac{\pi t}{6} + b_1 \sin \frac{\pi t}{6} + a_2 \cos \frac{\pi t}{3} + b_2 \sin \frac{\pi t}{3} + a_3 \cos \frac{\pi t}{2} + b_3 \sin \frac{\pi t}{2} + a_4 \cos \frac{2\pi t}{3} + b_4 \sin \frac{2\pi t}{3} + a_5 \cos \frac{5\pi t}{6} + b_5 \sin \frac{5\pi t}{6} + a_6 \cos \pi t.
+\end{equation}
+
+There are 6 harmonics in the equation and these harmonics corresponds to the periods: 12, 6, 4, 3, 2.4, and 2 months [@phien80]. The sine term of the sixth harmonic is not included since it will be zero for all values of $t$.
+
+```{r}
+t <- 1:(4*12)
+s = c = matrix(nr = length(t), nc = 6)
+for(n in 1:6){c[,n] = cos(2*pi*n*t/12)
+s[,n] = sin(2*pi*n*t/12)}
+s <- s[,-6]
+```
+
+We are going to perform backward elimination stepwise time series regression to generate 10 Fourier series models with different number of harmonics. This will be discussed in the next section.
+
+# Model Fitting
+
+Our models will inevitably involve one or more parameters whose values must be estimated from the observed series. Model fitting consists of finding the best possible estimates of those unknown parameters within a given model. In performing backward elimination stepwise time series regression, we are going to use least squares for estimation which is default in the `lm()` function of R.
+
+Model 1 is the model with all the terms. After fitting model 1 to the observed data, we will eliminate the term which has the highest $p$ value or the least significant term.
+
+```{r}
+m1 <- lm(Rainfall ~ c + s)
+summary(m1)
+```
+
+We can see in the model summary that the 5th harmonic of the sine term has the highest $p$ value among the terms. Model 2 will then be the model without this term.
+
+```{r}
+m2 <- lm(Rainfall ~ s[,1] + s[,2] + s[,3] + s[,4] + c[,1] + c[,2] + c[,3] + c[,4] + c[,5] + c[,6])
+#s[,5] is not included
+summary(m2)
+```
+
+Now we can see that the 3rd harmonic of the sine term is the least significant term in model 2. This term will be gone in model 3. This goes on until 10 models are generated.
+
+```{r}
+m3 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,3] + c[,4] + c[,5] + c[,6])
+#s[,5], s[,3] are not included
+m4 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,4] + c[,5] + c[,6])
+#s[,5], s[,3], c[,3] are not included
+m5 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,4] + c[,5])
+#s[,5], s[,3], c[,3], c[,6] are not included
+m6 <- lm(Rainfall ~ s[,1] + s[,2] + c[,1] + c[,2] + c[,4] + c[,5])
+#s[,5], s[,3], c[,3], c[,6], s[,4] are not included
+m7<-lm(Rainfall ~ s[,1] + s[,2] + c[,1] + c[,2] + c[,5])
+#s[,5], s[,3], c[,3], c[,6], s[,4], c[,4] are not included
+m8 <- lm(Rainfall ~ s[,1] + s[,2] + c[,1] +c[,2])
+#s[,5], s[,3], c[,3], c[,6], s[,4], c[,4], c[,5] are not included
+m9 <- lm(Rainfall ~ s[,1] + c[,1] + c[,2])
+#s[,5], s[,3], c[,3], c[,6], s[,4], c[,4], c[,5], s[,2] are not included
+m10 <- lm(Rainfall ~ s[,1] + c[,1])
+#s[,5], s[,3], c[,3], c[,6], s[,4], c[,4], c[,5], s[,2], c[,2] are not included
+```
+
+# Model Diagnostics
+
+Model diagnostics is concerned with assessing the quality of the model that we
+have specified and estimated. Here we are going to see which is the best fit model. We are going to compute the coefficient of determination $R^2$, adjusted coefficient of determination $\bar{R^2}$, residual standard error (RSE), and Akaike Information Criterion (AIC) of each model and then compare them to determine the best-fit model for the periodic component of the observed series.
+
+
 
 # Bibliography
