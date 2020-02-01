@@ -1,8 +1,10 @@
 ---
 title: "Time Series Analysis: Modelling the Periodic Component of Monthly Data using Fourier Series Harmonic Analysis in R"
-subtile: A Vignette in Advanced Topics in Mathematics
+subtitle: A Vignette in Advanced Topics in Mathematics
 author: |
-  ORVILLE D. HOMBREBUENO
+  | Orville D. Hombrebueno
+  | odhombrebueno@nvsu.edu.ph
+date: "February 2, 2020"
 output: 
     pdf_document
 fontsize: 12pt
@@ -38,6 +40,8 @@ A given time series with respect to time $y(t)$ can be decomposed into the sum o
 y(t)=P_{t}+T_{t}+\epsilon_{t}.
 \end{equation}
 
+\pagebreak
+
 ```{r, fig.align='center'}
 plot(decompose(Rainfall))
 ```
@@ -61,6 +65,8 @@ Substituting $z$ by $\frac{\pi x}{L}$,
 \begin{equation}
 f(x)=\frac{a_{0}}{2}+\sum_{n=1}^{\infty}\left(a_{n} \cos \frac{n \pi x}{L} +b_{n} \sin \frac{n \pi x}{L} \right).
 \end{equation}
+
+\pagebreak
 
 To solve for the coefficients we have the following equations:
 
@@ -172,6 +178,8 @@ Models <- 1:10
 plot(Models, RSquared, type = "o")
 ```
 
+\pagebreak
+
 ```{r, fig.align='center'}
 AdjustedRSquared <- c(sm1$adj.r.squared, sm2$adj.r.squared, 
                       sm3$adj.r.squared, sm4$adj.r.squared, 
@@ -182,12 +190,16 @@ AdjustedRSquared <- c(sm1$adj.r.squared, sm2$adj.r.squared,
 plot(Models, AdjustedRSquared, type = "o")
 ```
 
+\pagebreak
+
 ```{r, fig.align='center'}
 RSE <- c(sm1$sigma, sm2$sigma, sm3$sigma, sm4$sigma, sm5$sigma,
          sm6$sigma, sm7$sigma, sm8$sigma, sm9$sigma, sm10$sigma)
 
 plot(Models, RSE, type = "o")
 ```
+
+\pagebreak
 
 ```{r, fig.align='center'}
 A <- AIC(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10)
@@ -197,11 +209,15 @@ plot(Models, AIC, type = "o")
 
 Looking at the results, there is a sudden increase in the change of values for $R^2$, $\bar{R^2}$, RSE, and AIC from model 7 to model 8. This tells us that model 7 is the best-fit model. The figure below is the observed series together with model 7.
 
+\pagebreak
+
 ```{r, fig.align='center'}
 fv <- ts(m7$fitted.values, frequency = 12, start = 2012)
 ts.plot(Rainfall, fv, gpars = list(col = c("black", "red")), 
         ylab = "Rainfall")
 ```
+
+\pagebreak
 
 ```{r}
 summary(m7)
