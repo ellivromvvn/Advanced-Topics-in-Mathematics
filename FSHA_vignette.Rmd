@@ -1,27 +1,36 @@
 ---
-title: "Time Series Analysis: Modelling the Periodic Component of Monthly Data using Fourier Series Harmonic Analysis in RStudio"
-author: ORVILLE D. HOMBREBUENO
+title: "Time Series Analysis: Modelling the Periodic Component of Monthly Data using Fourier Series Harmonic Analysis in R"
+subtile: A Vignette in Advanced Topics in Mathematics
+author: |
+  ORVILLE D. HOMBREBUENO
 output: 
-    html_notebook
-documentclass: article
+    pdf_document
+fontsize: 12pt
 csl: apa.csl
 bibliography: FSHA_vignette.bib
 nocite: '@*'
 ---
+```{r, include=FALSE, }
+knitr::opts_chunk$set(prompt = T, comment = '')
+```
+
+
 A time series is a sequence of observations taken sequentially in time. Many sets of data appear as time series: a monthly sequence of the quantity of goods shipped from a factory, a weekly series of the number of road accidents, daily rainfall amounts, hourly observations made on the yield of a chemical process, and so on. Examples of time series abound in such fields as economics, business, engineering, the natural sciences (especially geophysics and meteorology), and the social sciences. The main features of many time series are trends and seasonal variations that can be modelled deterministically with mathematical functions of time. Time series analysis is aimed at explaining the main features in the data using appropriate statistical models and descriptive methods.
 
 In this vignette, I will be discussing time series analysis using basic Fourier series harmonic analysis [@weltner14]. I will show how to fit a Fourier series model to the periodic component of monthly rainfall data using R [@R]. In doing this, I will be following the model-building steps espoused by @box16: 1. model specification, 2. model fitting, 3. model diagnostics. I will not discuss theories behind Fourier series harmonic analysis nor will I discuss the importance of fitting a Fourier series model to monthly rainfall data. I will focus on the model fitting process and data analysis, for which I will be using R. 
+
+\pagebreak
 
 # Model Specification
 
 Our data is the monthly rainfall of Bayombong, Nueva Vizcaya from 2012 to 2015 in millimeters. Let us see the data.
 
-```{r}
+```{r, fig.align='center'}
 load("~/R/PhD/Advanced-Topics-in-Mathematics/Rainfall.RData")
 plot(Rainfall)
 ```
 
-In model specification (or identification), an appropriate model for a given observed series is selected. To choose which model to use is not trivial. However, since my topic is Fourier series harmonic analysis, I will use Fourier series. Moreover, the data show periodic behaviour. I have chosen this kind of data to make the use of Fourier series appropriate.
+In model specification (or identification), an appropriate model for a given observed series is selected. To choose which model to use is not trivial. However, since my topic is Fourier series harmonic analysis, I will use Fourier series. Moreover, the data show periodic behavior. I have chosen this kind of data to make the use of Fourier series appropriate.
 
 A given time series with respect to time $y(t)$ can be decomposed into the sum of its periodic component $P_{t}$, its trend component $T_{t}$, and random component $\epsilon_{t}$:
 
@@ -29,7 +38,7 @@ A given time series with respect to time $y(t)$ can be decomposed into the sum o
 y(t)=P_{t}+T_{t}+\epsilon_{t}.
 \end{equation}
 
-```{r}
+```{r, fig.align='center'}
 plot(decompose(Rainfall))
 ```
 
@@ -66,13 +75,16 @@ To solve for the coefficients we have the following equations:
 Defining our Fourier series for $P_{t}$ we have
 
 \begin{equation}
-P_{t}=a_{0}+\sum_{n=1}^{\frac{P}{2}} (a_{n} \cos \frac{2 \pi n t}{P} + b_{n} \sin \frac{2 \pi n t}{P})
+P_{t}=a_{0}+\sum_{n=1}^{\frac{P}{2}} \left(a_{n} \cos \frac{2 \pi n t}{P} + b_{n} \sin \frac{2 \pi n t}{P} \right)
 \end{equation}
 
 where $a_{0}$ is the mean monthly rainfall for the model, $a_{n}$ and $b_{n}$ are the Fourier coefficients, $n$ is the number of harmonic, and $P$ is the base period which is 12 months for 1 year. To make the equation more specific, we have
 
 \begin{equation}
-P_t =  a_0 + a_1 \cos \frac{\pi t}{6} + b_1 \sin \frac{\pi t}{6} + a_2 \cos \frac{\pi t}{3} + b_2 \sin \frac{\pi t}{3} + a_3 \cos \frac{\pi t}{2} + b_3 \sin \frac{\pi t}{2} + a_4 \cos \frac{2\pi t}{3} + b_4 \sin \frac{2\pi t}{3} + a_5 \cos \frac{5\pi t}{6} + b_5 \sin \frac{5\pi t}{6} + a_6 \cos \pi t.
+\begin{aligned}
+P_t = &a_0 + a_1 \cos \frac{\pi t}{6} + b_1 \sin \frac{\pi t}{6} + a_2 \cos \frac{\pi t}{3} + b_2 \sin \frac{\pi t}{3} + a_3 \cos \frac{\pi t}{2} + b_3 \sin \frac{\pi t}{2}\\
+&+ a_4 \cos \frac{2\pi t}{3} + b_4 \sin \frac{2\pi t}{3} + a_5 \cos \frac{5\pi t}{6} + b_5 \sin \frac{5\pi t}{6} + a_6 \cos \pi t.
+\end{aligned}
 \end{equation}
 
 There are 6 harmonics in the equation and these harmonics corresponds to the periods: 12, 6, 4, 3, 2.4, and 2 months [@phien80]. The sine term of the sixth harmonic is not included since it will be zero for all values of $t$.
@@ -85,11 +97,13 @@ s[,n] = sin(2*pi*n*t/12)}
 s <- s[,-6]
 ```
 
-We are going to perform backward elimination stepwise time series regression to generate 10 Fourier series models with different number of harmonics. This will be discussed in the next section.
+We are going to perform backward elimination step wise time series regression to generate 10 Fourier series models with different number of harmonics. This will be discussed in the next section.
+
+\pagebreak
 
 # Model Fitting
 
-Our models will inevitably involve one or more parameters whose values must be estimated from the observed series. Model fitting consists of finding the best possible estimates of those unknown parameters within a given model. In performing backward elimination stepwise time series regression, we are going to use least squares for estimation which is default in the `lm()` function of R.
+Our models will inevitably involve one or more parameters whose values must be estimated from the observed series. Model fitting consists of finding the best possible estimates of those unknown parameters within a given model. In performing backward elimination step wise time series regression, we are going to use least squares for estimation which is default in the `lm()` function of R.
 
 Model 1 is the model with all the terms. After fitting model 1 to the observed data, we will eliminate the term which has the highest $p$ value or the least significant term.
 
@@ -101,7 +115,8 @@ summary(m1)
 We can see in the model summary that the 5th harmonic of the sine term has the highest $p$ value among the terms. Model 2 will then be the model without this term.
 
 ```{r}
-m2 <- lm(Rainfall ~ s[,1] + s[,2] + s[,3] + s[,4] + c[,1] + c[,2] + c[,3] + c[,4] + c[,5] + c[,6])
+m2 <- lm(Rainfall ~ s[,1] + s[,2] + s[,3] + s[,4] + c[,1] + c[,2] + c[,3] 
+         + c[,4] + c[,5] + c[,6])
 #s[,5] is not included
 summary(m2)
 ```
@@ -109,9 +124,11 @@ summary(m2)
 Now we can see that the 3rd harmonic of the sine term is the least significant term in model 2. This term will be gone in model 3. This goes on until 10 models are generated.
 
 ```{r}
-m3 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,3] + c[,4] + c[,5] + c[,6])
+m3 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,3] + c[,4] 
+         + c[,5] + c[,6])
 #s[,5], s[,3] are not included
-m4 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,4] + c[,5] + c[,6])
+m4 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,4] + c[,5] 
+         + c[,6])
 #s[,5], s[,3], c[,3] are not included
 m5 <- lm(Rainfall ~ s[,1] + s[,2] + s[,4] + c[,1] + c[,2] + c[,4] + c[,5])
 #s[,5], s[,3], c[,3], c[,6] are not included
@@ -124,14 +141,83 @@ m8 <- lm(Rainfall ~ s[,1] + s[,2] + c[,1] +c[,2])
 m9 <- lm(Rainfall ~ s[,1] + c[,1] + c[,2])
 #s[,5], s[,3], c[,3], c[,6], s[,4], c[,4], c[,5], s[,2] are not included
 m10 <- lm(Rainfall ~ s[,1] + c[,1])
-#s[,5], s[,3], c[,3], c[,6], s[,4], c[,4], c[,5], s[,2], c[,2] are not included
+#s[,5], s[,3], c[,3], c[,6], s[,4], c[,4], c[,5], s[,2], c[,2] 
+#are not included
 ```
+
+\pagebreak
 
 # Model Diagnostics
 
 Model diagnostics is concerned with assessing the quality of the model that we
 have specified and estimated. Here we are going to see which is the best fit model. We are going to compute the coefficient of determination $R^2$, adjusted coefficient of determination $\bar{R^2}$, residual standard error (RSE), and Akaike Information Criterion (AIC) of each model and then compare them to determine the best-fit model for the periodic component of the observed series.
 
+```{r, fig.align='center'}
+sm1 <- summary(m1)
+sm2 <- summary(m2)
+sm3 <- summary(m3)
+sm4 <- summary(m4)
+sm5 <- summary(m5)
+sm6 <- summary(m6)
+sm7 <- summary(m7)
+sm8 <- summary(m8)
+sm9 <- summary(m9)
+sm10 <- summary(m10)
 
+RSquared <- c(sm1$r.squared, sm2$r.squared, sm3$r.squared, sm4$r.squared,
+              sm5$r.squared, sm6$r.squared, sm7$r.squared, sm8$r.squared,
+              sm9$r.squared, sm10$r.squared)
+
+Models <- 1:10
+plot(Models, RSquared, type = "o")
+```
+
+```{r, fig.align='center'}
+AdjustedRSquared <- c(sm1$adj.r.squared, sm2$adj.r.squared, 
+                      sm3$adj.r.squared, sm4$adj.r.squared, 
+                      sm5$adj.r.squared, sm6$adj.r.squared,
+                      sm7$adj.r.squared, sm8$adj.r.squared, 
+                      sm9$adj.r.squared, sm10$adj.r.squared)
+
+plot(Models, AdjustedRSquared, type = "o")
+```
+
+```{r, fig.align='center'}
+RSE <- c(sm1$sigma, sm2$sigma, sm3$sigma, sm4$sigma, sm5$sigma,
+         sm6$sigma, sm7$sigma, sm8$sigma, sm9$sigma, sm10$sigma)
+
+plot(Models, RSE, type = "o")
+```
+
+```{r, fig.align='center'}
+A <- AIC(m1,m2,m3,m4,m5,m6,m7,m8,m9,m10)
+AIC <- A$AIC
+plot(Models, AIC, type = "o")
+```
+
+Looking at the results, there is a sudden increase in the change of values for $R^2$, $\bar{R^2}$, RSE, and AIC from model 7 to model 8. This tells us that model 7 is the best-fit model. The figure below is the observed series together with model 7.
+
+```{r, fig.align='center'}
+fv <- ts(m7$fitted.values, frequency = 12, start = 2012)
+ts.plot(Rainfall, fv, gpars = list(col = c("black", "red")), 
+        ylab = "Rainfall")
+```
+
+```{r}
+summary(m7)
+```
+
+Looking at the model summary, the best fit Fourier series model is:
+
+\begin{equation}
+\begin{aligned}
+P_{t}=&143.892-83.293 \cos \frac{\pi t}{6} -97.351 \sin \frac{\pi t}{6} -28.339 \cos \frac{\pi t}{3} + 27.573 \sin \frac{\pi t}{3}\\
+&+ 25.355 \cos \frac{5\pi t}{6}.
+\end{aligned}
+\end{equation}
+
+The best-fit model has 6 terms: the mean term, the first harmonic, the second harmonic and the cosine term of the fifth harmonic – accounting to the 12-, 6-, and 2.4-month periods respectively – all of which are significant having p-values lesser than 0.05.
+
+\pagebreak
 
 # Bibliography
