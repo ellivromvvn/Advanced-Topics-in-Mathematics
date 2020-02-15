@@ -1,0 +1,13 @@
+---
+title: "Complex Analysis"
+output: html_notebook
+---
+```{r}
+z<-2+2i
+z
+x<-complex(real = 2,imaginary = -2)
+x
+x+z
+sqrt(-1+0i)
+```
+
