@@ -1,0 +1,54 @@
+---
+title: "A Critique Paper on Laplace Transform: Making the Variational Iteration Method Easier"
+author: |
+  | **SAINT MARY'S UNIVERSITY**
+  | Bayombong, Nueva Vizcaya
+  | **School of Graduate Studies**
+  |
+  |
+  | In Partial Fulfillment of the Requirements in
+  | **Advanced Topics in Mathematics**
+  |
+  |
+  | Submitted by:
+  | ORVILLE D. HOMBREBUENO
+  | odhombrebueno@nvsu.edu.ph
+  | 
+  |
+  | Submitted to:
+  | PROFESSOR ANALYN GUEVARA
+date: "May 28, 2020"
+output: pdf_document
+fontsize: 12pt
+bibliography: FSHA_vignette.bib
+csl: apa.csl
+documentclass: article
+---
+\pagebreak
+# Summary
+
+The critique paper is entitled **Laplace Transform: Making the Variational Iteration Method Easier** by @anjum19. The study is composed of four parts: 1) introduction, 2) the identification of the Lagrange multiplier by the Laplace transform, 3) an example and 4) discussion and conclusion.
+
+In the introduction, the authors started by discussing how variational iteration methods (VIM) flourished from the proposed 1990s solution for a seepage flow with fractional derivatives and a nonlinear oscillator to its extensive use now a days as a mathematical tool to solve various nonlinear equations. They cited pioneering studies that paved the way to VIM's becoming a full-fledged method in mathematics. However, they pointed out that in the method, the identification of the Lagrange multiplier can be really complicated -- it requires knowledge of variational theory -- and this can hinder applications of the method to practical problems. They proposed an easier identification process using Laplace transform; a function according to them is accessible in all mathematics textbooks.
+
+In part two, the authors first introduced the general nonlinear oscillator equation, $u{''}(t)+f(u)=0$, with its initial conditions, $u(0)=A$, $u^{'}(0)=0$. This equation was then rewritten in the form $u^{''}+\omega^{2}u+g(u)=0$ and then its corresponding correction functional equation was given with respect to VIM. The general Lagrange multiplier, $\lambda$, according to the authors, can be determined by solving the correction functional using variational theory. 
+
+The authors then started to reflect on some pioneering studies in the field. In 2007, Laplace transform wast adopted in the solution process of VIM. In 2009, VIM could be easily constructed by Laplace transform without using the correction functional and restricted variations. By 2018, in the solution of fractional differential equations, VIM has become very superior compared to other methods and that Laplace transform plays an even more important role in the solution process. According to the authors, their proposed method is also valid for fractal derivative equations.
+
+Proceeding with the presentation of their method, Laplace transform was applied to both sides of the given correction functional equation. Then, by making the Laplace transform of the correctional function stationary with respect to $u_n(t)$, the Laplace transform of $\lambda$ was determined. Finally, by getting the inverse Laplace transform of the previous result, the Lagrange multiplier, $\lambda$, was determined. This according to the authors, is easier than using variational theory.
+
+The example given in part three is the nonlinear oscillator with coordinate-dependent mass, $(1+\alpha u^{2})u^{''}+\alpha uu^{'2}-u(1-u^{2})=0$, with again initial conditions, $u(0)=A$, $u^{'}(0)=0$. The equation was then written in the form, $u^{''}+\omega^{2}u+g(u)=0$. Then, Laplace transform was performed to both sides of its corresponding correction functional equation. Assuming that the initial solution is $u_0(t)=A\cos{\omega t}$, $L[u_1(t)]$ was determined. Then by performing inverse Laplace transform, the first order approximate solution was obtained. From this result, the value of $\omega$ was obtained. According to the authors, the obtained value of $\omega$ is exactly the same as the result of previous studies using the homotopy perturbation method or He's frequency-amplitude formulation.
+
+In the last part of the study, the authors claimed that it is easy to find the Lagrange multiplier applying Laplace transform. According to them, Laplace transform is widely known to almost all non-mathematicians and using their method will make VIM accessible to all researchers who solve different nonlinear problems since they no longer need special knowledge of elusive calculus of variations.
+
+# Insights, Stand, Reflections and Suggestions
+
+What made me interested in the study is its application to nonlinear problems. Lately, I have been seeking to understand methods in solving nonlinear problems. This spurred from the fact that linear solutions are limited since problems are usually nonlinear by nature in the real world setting. 
+
+Laplace transform is a complex-valued function such that its domain is the set of real numbers and its range is the set of complex numbers. However, the study did not focused on this property. The study focused on the application of Laplace transform to VIMs. The authors did not delve into theories and properties, proofs and etc.. I guess that is how applied mathematics differ from pure mathematics.. I have always been a fan of applied mathematics. I am the type of person who would prefer to learn concepts in mathematics and apply it. I prefer the computational approach. VIMs are new to me. Its an interesting topic. I want to learn about it.
+
+I also read an article on complex valued networks, its different from complex -valued functions. Its a mapping $f(z):z\mapsto z$ for $z\in \mathbb{C}$ [@ozdemir11]. Its another research about nonlinearity.
+
+In my critique, I did not label equations I described in the summary.. I will have to do this next time I critique a paper to make my critiquing more comfortable and a little bit detailed for the reader to understand.
+
+# References
